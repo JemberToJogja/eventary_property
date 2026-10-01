@@ -30,6 +30,10 @@ const List<SidebarItem> sidebarItems = [
     label: 'Events',
   ),
   SidebarItem(
+  icon: Icons.home_work_rounded,
+  label: 'Penyewaan',
+),
+  SidebarItem(
     icon: Icons.settings_rounded,
     label: 'Settings',
   ),

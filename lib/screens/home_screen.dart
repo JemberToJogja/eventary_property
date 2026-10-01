@@ -1,5 +1,6 @@
 import 'package:eventary_prototype/admin/event/view/event_screen.dart';
 import 'package:eventary_prototype/admin/maintenance/view/maintenance_screen.dart';
+import 'package:eventary_prototype/admin/penyewaan/view/rental_screen.dart';
 import 'package:eventary_prototype/screens/dashboard_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:maplibre_gl/maplibre_gl.dart' show LatLng;
@@ -334,6 +335,10 @@ class _HomeScreenState extends State<HomeScreen> {
       // ==========================================================
 
       case 5:
+        return const RentalScreen();
+
+        
+      case 6:
         return const Center(
           child: Text(
             'Settings belum tersedia di prototype.',
