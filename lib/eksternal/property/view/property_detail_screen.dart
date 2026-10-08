@@ -1,20 +1,33 @@
 import 'package:eventary_prototype/eksternal/home/model/external_property.dart';
 import 'package:flutter/material.dart';
 
-
-
 class PropertyDetailScreen extends StatelessWidget {
   final ExternalProperty property;
+  final bool showNavbar;
+  final VoidCallback? onBack;
+  final VoidCallback? onRequestRental;
 
   const PropertyDetailScreen({
     super.key,
     required this.property,
+    this.showNavbar = true,
+    this.onBack,
+    this.onRequestRental,
   });
+
+  // =========================================================
+  // COLORS
+  // =========================================================
 
   static const Color navy = Color(0xFF172033);
   static const Color gold = Color(0xFFC09B60);
   static const Color background = Color(0xFFF7F7F5);
   static const Color textGrey = Color(0xFF6F747C);
+  static const Color border = Color(0xFFE5E5E1);
+
+  // =========================================================
+  // BUILD
+  // =========================================================
 
   @override
   Widget build(BuildContext context) {
@@ -23,14 +36,20 @@ class PropertyDetailScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            _navbar(context),
+            if (showNavbar) _navbar(context),
+
             _hero(),
+
             _overview(),
+
             _spaces(),
+
             _facilities(),
-            _events(),
+
             _location(),
+
             _rentalBanner(),
+
             _footer(),
           ],
         ),
@@ -51,16 +70,36 @@ class PropertyDetailScreen extends StatelessWidget {
         children: [
           GestureDetector(
             onTap: () {
-              Navigator.pop(context);
+              if (onBack != null) {
+                onBack!();
+              } else {
+                Navigator.pop(context);
+              }
             },
-            child: const Text(
-              'EVENTARY',
-              style: TextStyle(
-                color: navy,
-                fontSize: 22,
-                fontWeight: FontWeight.w800,
-                letterSpacing: 2,
-              ),
+            child: const Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'EVENTARY',
+                  style: TextStyle(
+                    color: navy,
+                    fontSize: 21,
+                    fontWeight: FontWeight.w800,
+                    letterSpacing: 2,
+                  ),
+                ),
+                SizedBox(height: 2),
+                Text(
+                  'PROPERTY VISUALIZATION',
+                  style: TextStyle(
+                    color: gold,
+                    fontSize: 7.5,
+                    fontWeight: FontWeight.w700,
+                    letterSpacing: 1.4,
+                  ),
+                ),
+              ],
             ),
           ),
 
@@ -68,7 +107,11 @@ class PropertyDetailScreen extends StatelessWidget {
 
           TextButton(
             onPressed: () {
-              Navigator.pop(context);
+              if (onBack != null) {
+                onBack!();
+              } else {
+                Navigator.pop(context);
+              }
             },
             child: const Text(
               'Properties',
@@ -78,6 +121,8 @@ class PropertyDetailScreen extends StatelessWidget {
               ),
             ),
           ),
+
+          const SizedBox(width: 8),
 
           TextButton(
             onPressed: () {},
@@ -90,36 +135,16 @@ class PropertyDetailScreen extends StatelessWidget {
             ),
           ),
 
+          const SizedBox(width: 8),
+
           TextButton(
             onPressed: () {},
             child: const Text(
-              'Events',
+              'About',
               style: TextStyle(
                 color: textGrey,
                 fontSize: 13,
               ),
-            ),
-          ),
-
-          const SizedBox(width: 20),
-
-          ElevatedButton(
-            onPressed: () {},
-            style: ElevatedButton.styleFrom(
-              backgroundColor: navy,
-              foregroundColor: Colors.white,
-              elevation: 0,
-              padding: const EdgeInsets.symmetric(
-                horizontal: 20,
-                vertical: 14,
-              ),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(3),
-              ),
-            ),
-            child: const Text(
-              'Request Rental',
-              style: TextStyle(fontSize: 12),
             ),
           ),
         ],
@@ -134,128 +159,213 @@ class PropertyDetailScreen extends StatelessWidget {
   Widget _hero() {
     return Container(
       width: double.infinity,
-      height: 480,
       color: navy,
-      child: Row(
-        children: [
-          Expanded(
-            flex: 5,
-            child: Padding(
-              padding: const EdgeInsets.only(
-                left: 70,
-                right: 40,
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    property.category.toUpperCase(),
-                    style: const TextStyle(
-                      color: gold,
-                      fontSize: 11,
-                      fontWeight: FontWeight.w700,
-                      letterSpacing: 2,
-                    ),
+      padding: const EdgeInsets.symmetric(
+        horizontal: 70,
+        vertical: 55,
+      ),
+      child: Center(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(
+            maxWidth: 1250,
+          ),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              // LEFT
+              Expanded(
+                flex: 5,
+                child: Padding(
+                  padding: const EdgeInsets.only(
+                    right: 55,
                   ),
-
-                  const SizedBox(height: 18),
-
-                  Text(
-                    property.name,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 48,
-                      height: 1.1,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-
-                  const SizedBox(height: 20),
-
-                  Row(
+                  child: Column(
+                    crossAxisAlignment:
+                        CrossAxisAlignment.start,
                     children: [
-                      const Icon(
-                        Icons.location_on_outlined,
-                        color: Color(0xFFADB5C1),
-                        size: 18,
-                      ),
-                      const SizedBox(width: 7),
                       Text(
-                        property.location,
+                        property.category.toUpperCase(),
                         style: const TextStyle(
-                          color: Color(0xFFADB5C1),
-                          fontSize: 14,
+                          color: gold,
+                          fontSize: 11,
+                          fontWeight: FontWeight.w700,
+                          letterSpacing: 2,
+                        ),
+                      ),
+
+                      const SizedBox(height: 18),
+
+                      Text(
+                        property.name,
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 50,
+                          height: 1.08,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+
+                      const SizedBox(height: 18),
+
+                      Row(
+                        children: [
+                          const Icon(
+                            Icons.location_on_outlined,
+                            color: Color(0xFFB8C0CF),
+                            size: 18,
+                          ),
+                          const SizedBox(width: 7),
+                          Text(
+                            property.location,
+                            style: const TextStyle(
+                              color: Color(0xFFB8C0CF),
+                              fontSize: 14,
+                            ),
+                          ),
+                        ],
+                      ),
+
+                      const SizedBox(height: 22),
+
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 13,
+                          vertical: 8,
+                        ),
+                        decoration: BoxDecoration(
+                          color: Colors.white.withOpacity(.10),
+                          border: Border.all(
+                            color: Colors.white.withOpacity(.12),
+                          ),
+                          borderRadius:
+                              BorderRadius.circular(4),
+                        ),
+                        child: Text(
+                          property.status,
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 11,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+
+                      const SizedBox(height: 25),
+
+                      SizedBox(
+                        width: 520,
+                        child: Text(
+                          property.description,
+                          maxLines: 3,
+                          overflow: TextOverflow.ellipsis,
+                          style: const TextStyle(
+                            color: Color(0xFFB8C0CF),
+                            fontSize: 13,
+                            height: 1.7,
+                          ),
                         ),
                       ),
                     ],
                   ),
-
-                  const SizedBox(height: 28),
-
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 12,
-                      vertical: 7,
-                    ),
-                    color: Colors.white.withOpacity(0.1),
-                    child: Text(
-                      property.status,
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 11,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ),
-                ],
+                ),
               ),
-            ),
+
+              // RIGHT - IMAGE
+              Expanded(
+                flex: 5,
+                child: _heroImage(),
+              ),
+            ],
           ),
+        ),
+      ),
+    );
+  }
 
-          Expanded(
-            flex: 4,
-            child: Container(
-              margin: const EdgeInsets.only(
-                right: 70,
-                top: 45,
-                bottom: 45,
-              ),
-              decoration: BoxDecoration(
-                color: const Color(0xFF263248),
-                borderRadius: BorderRadius.circular(4),
-              ),
-              child: property.image.isNotEmpty
-                  ? ClipRRect(
-                      borderRadius: BorderRadius.circular(4),
-                      child: Image.network(
-                        property.image,
-                        fit: BoxFit.cover,
-                        errorBuilder: (
-                          context,
-                          error,
-                          stackTrace,
-                        ) {
-                          return const Center(
-                            child: Icon(
-                              Icons.business_rounded,
-                              color: Color(0xFF68758A),
-                              size: 110,
-                            ),
-                          );
-                        },
-                      ),
-                    )
-                  : const Center(
-                      child: Icon(
-                        Icons.business_rounded,
-                        color: Color(0xFF68758A),
-                        size: 110,
-                      ),
-                    ),
-            ),
+  Widget _heroImage() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.end,
+      children: [
+        ClipRRect(
+          borderRadius: BorderRadius.circular(8),
+          child: SizedBox(
+            width: double.infinity,
+            height: 340,
+            child: property.image.isNotEmpty
+                ? Image.network(
+                    property.image,
+                    fit: BoxFit.cover,
+                    errorBuilder: (
+                      context,
+                      error,
+                      stackTrace,
+                    ) {
+                      return _imagePlaceholder();
+                    },
+                  )
+                : _imagePlaceholder(),
           ),
-        ],
+        ),
+
+        const SizedBox(height: 12),
+
+        Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            _thumbnail(property.image),
+            const SizedBox(width: 8),
+            _thumbnail(property.image),
+            const SizedBox(width: 8),
+            _thumbnail(property.image),
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget _thumbnail(String image) {
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(5),
+      child: SizedBox(
+        width: 68,
+        height: 48,
+        child: image.isNotEmpty
+            ? Image.network(
+                image,
+                fit: BoxFit.cover,
+                errorBuilder: (
+                  context,
+                  error,
+                  stackTrace,
+                ) {
+                  return _smallPlaceholder();
+                },
+              )
+            : _smallPlaceholder(),
+      ),
+    );
+  }
+
+  Widget _imagePlaceholder() {
+    return Container(
+      color: const Color(0xFF263248),
+      child: const Center(
+        child: Icon(
+          Icons.business_rounded,
+          color: Color(0xFF68758A),
+          size: 85,
+        ),
+      ),
+    );
+  }
+
+  Widget _smallPlaceholder() {
+    return Container(
+      color: const Color(0xFF344057),
+      child: const Icon(
+        Icons.image_outlined,
+        color: Colors.white54,
+        size: 20,
       ),
     );
   }
@@ -270,118 +380,142 @@ class PropertyDetailScreen extends StatelessWidget {
       color: background,
       padding: const EdgeInsets.symmetric(
         horizontal: 70,
-        vertical: 75,
+        vertical: 65,
       ),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Expanded(
-            flex: 5,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text(
-                  'ABOUT THE PROPERTY',
-                  style: TextStyle(
-                    color: gold,
-                    fontSize: 11,
-                    fontWeight: FontWeight.w700,
-                    letterSpacing: 1.8,
-                  ),
+      child: Center(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(
+            maxWidth: 1250,
+          ),
+          child: Column(
+            crossAxisAlignment:
+                CrossAxisAlignment.start,
+            children: [
+              const Text(
+                'ABOUT THE PROPERTY',
+                style: TextStyle(
+                  color: gold,
+                  fontSize: 11,
+                  fontWeight: FontWeight.w700,
+                  letterSpacing: 1.8,
                 ),
+              ),
 
-                const SizedBox(height: 15),
+              const SizedBox(height: 12),
 
-                const Text(
-                  'A space designed for your next experience.',
-                  style: TextStyle(
-                    color: navy,
-                    fontSize: 32,
-                    height: 1.2,
-                    fontWeight: FontWeight.w700,
-                  ),
+              const Text(
+                'A space designed for your next experience.',
+                style: TextStyle(
+                  color: navy,
+                  fontSize: 32,
+                  fontWeight: FontWeight.w700,
                 ),
+              ),
 
-                const SizedBox(height: 20),
+              const SizedBox(height: 15),
 
-                Text(
+              SizedBox(
+                width: 900,
+                child: Text(
                   property.description,
                   style: const TextStyle(
                     color: textGrey,
                     fontSize: 14,
-                    height: 1.9,
+                    height: 1.8,
                   ),
                 ),
-              ],
-            ),
-          ),
+              ),
 
-          const SizedBox(width: 90),
+              const SizedBox(height: 32),
 
-          Expanded(
-            flex: 3,
-            child: Column(
-              children: [
-                _infoRow(
-                  'Property Area',
-                  property.area,
-                ),
-                _infoRow(
-                  'Location',
-                  property.location,
-                ),
-                _infoRow(
-                  'Status',
-                  property.status,
-                ),
-                _infoRow(
-                  'Property Type',
-                  property.category,
-                ),
-              ],
-            ),
+              Row(
+                children: [
+                  Expanded(
+                    child: _infoCard(
+                      Icons.square_foot_outlined,
+                      property.area,
+                      'Property Area',
+                    ),
+                  ),
+                  const SizedBox(width: 14),
+                  Expanded(
+                    child: _infoCard(
+                      Icons.business_outlined,
+                      property.category,
+                      'Property Type',
+                    ),
+                  ),
+                  const SizedBox(width: 14),
+                  Expanded(
+                    child: _infoCard(
+                      Icons.location_on_outlined,
+                      property.location,
+                      'Location',
+                    ),
+                  ),
+                  const SizedBox(width: 14),
+                  Expanded(
+                    child: _infoCard(
+                      Icons.check_circle_outline,
+                      property.status,
+                      'Status',
+                    ),
+                  ),
+                ],
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }
 
-  Widget _infoRow(
-    String title,
+  Widget _infoCard(
+    IconData icon,
     String value,
+    String label,
   ) {
     return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.symmetric(
-        vertical: 18,
-      ),
-      decoration: const BoxDecoration(
-        border: Border(
-          bottom: BorderSide(
-            color: Color(0xFFE0E1DD),
-          ),
+      padding: const EdgeInsets.all(20),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(
+          color: border,
         ),
       ),
       child: Row(
         children: [
-          Expanded(
-            child: Text(
-              title,
-              style: const TextStyle(
-                color: textGrey,
-                fontSize: 12,
-              ),
-            ),
+          Icon(
+            icon,
+            color: gold,
+            size: 23,
           ),
-          Flexible(
-            child: Text(
-              value,
-              textAlign: TextAlign.right,
-              style: const TextStyle(
-                color: navy,
-                fontSize: 12,
-                fontWeight: FontWeight.w700,
-              ),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment:
+                  CrossAxisAlignment.start,
+              children: [
+                Text(
+                  value,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(
+                    color: navy,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  label,
+                  style: const TextStyle(
+                    color: textGrey,
+                    fontSize: 11,
+                  ),
+                ),
+              ],
             ),
           ),
         ],
@@ -399,16 +533,22 @@ class PropertyDetailScreen extends StatelessWidget {
         'name': 'Main Exhibition Hall',
         'area': '5.000 m²',
         'capacity': '2.000 people',
+        'image':
+            'https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=900&q=80',
       },
       {
         'name': 'Event Ballroom',
         'area': '2.500 m²',
         'capacity': '800 people',
+        'image':
+            'https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&w=900&q=80',
       },
       {
         'name': 'Outdoor Area',
         'area': '3.000 m²',
         'capacity': '1.500 people',
+        'image':
+            'https://images.unsplash.com/photo-1507504031003-b417219a0fde?auto=format&fit=crop&w=900&q=80',
       },
     ];
 
@@ -417,50 +557,59 @@ class PropertyDetailScreen extends StatelessWidget {
       color: Colors.white,
       padding: const EdgeInsets.symmetric(
         horizontal: 70,
-        vertical: 75,
+        vertical: 70,
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text(
-            'AVAILABLE SPACES',
-            style: TextStyle(
-              color: gold,
-              fontSize: 11,
-              fontWeight: FontWeight.w700,
-              letterSpacing: 1.8,
-            ),
+      child: Center(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(
+            maxWidth: 1250,
           ),
+          child: Column(
+            crossAxisAlignment:
+                CrossAxisAlignment.start,
+            children: [
+              const Text(
+                'AVAILABLE SPACES',
+                style: TextStyle(
+                  color: gold,
+                  fontSize: 11,
+                  fontWeight: FontWeight.w700,
+                  letterSpacing: 1.8,
+                ),
+              ),
 
-          const SizedBox(height: 14),
+              const SizedBox(height: 12),
 
-          const Text(
-            'Choose the right space',
-            style: TextStyle(
-              color: navy,
-              fontSize: 32,
-              fontWeight: FontWeight.w700,
-            ),
+              const Text(
+                'Choose the right space',
+                style: TextStyle(
+                  color: navy,
+                  fontSize: 32,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+
+              const SizedBox(height: 30),
+
+              Row(
+                children: spaces.map(
+                  (space) {
+                    return Expanded(
+                      child: Padding(
+                        padding:
+                            const EdgeInsets.only(
+                          right: 15,
+                        ),
+                        child:
+                            _spaceCard(space),
+                      ),
+                    );
+                  },
+                ).toList(),
+              ),
+            ],
           ),
-
-          const SizedBox(height: 35),
-
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: spaces.map(
-              (space) {
-                return Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.only(
-                      right: 18,
-                    ),
-                    child: _spaceCard(space),
-                  ),
-                );
-              },
-            ).toList(),
-          ),
-        ],
+        ),
       ),
     );
   }
@@ -469,89 +618,105 @@ class PropertyDetailScreen extends StatelessWidget {
     Map<String, String> space,
   ) {
     return Container(
-      padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
         color: background,
+        borderRadius: BorderRadius.circular(8),
         border: Border.all(
-          color: const Color(0xFFE1E2DE),
+          color: border,
         ),
       ),
+      clipBehavior: Clip.antiAlias,
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment:
+            CrossAxisAlignment.start,
         children: [
-          Container(
-            height: 110,
+          SizedBox(
+            height: 175,
             width: double.infinity,
-            color: const Color(0xFFE1E2DE),
-            child: const Center(
-              child: Icon(
-                Icons.meeting_room_outlined,
-                size: 45,
-                color: Color(0xFF92958F),
-              ),
+            child: Image.network(
+              space['image']!,
+              fit: BoxFit.cover,
+              errorBuilder: (
+                context,
+                error,
+                stackTrace,
+              ) {
+                return Container(
+                  color: const Color(0xFFE4E5E1),
+                  child: const Icon(
+                    Icons.image_outlined,
+                    size: 45,
+                    color: Color(0xFF92958F),
+                  ),
+                );
+              },
             ),
           ),
 
-          const SizedBox(height: 20),
+          Padding(
+            padding: const EdgeInsets.all(20),
+            child: Column(
+              crossAxisAlignment:
+                  CrossAxisAlignment.start,
+              children: [
+                Text(
+                  space['name']!,
+                  style: const TextStyle(
+                    color: navy,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
 
-          Text(
-            space['name']!,
-            style: const TextStyle(
-              color: navy,
-              fontSize: 17,
-              fontWeight: FontWeight.w700,
-            ),
-          ),
+                const SizedBox(height: 12),
 
-          const SizedBox(height: 14),
+                Row(
+                  children: [
+                    const Icon(
+                      Icons.square_foot_outlined,
+                      size: 15,
+                      color: textGrey,
+                    ),
+                    const SizedBox(width: 6),
+                    Text(
+                      space['area']!,
+                      style: const TextStyle(
+                        color: textGrey,
+                        fontSize: 12,
+                      ),
+                    ),
+                    const SizedBox(width: 18),
+                    const Icon(
+                      Icons.people_outline,
+                      size: 15,
+                      color: textGrey,
+                    ),
+                    const SizedBox(width: 6),
+                    Text(
+                      space['capacity']!,
+                      style: const TextStyle(
+                        color: textGrey,
+                        fontSize: 12,
+                      ),
+                    ),
+                  ],
+                ),
 
-          _smallInfo(
-            Icons.square_foot_outlined,
-            space['area']!,
-          ),
+                const SizedBox(height: 15),
 
-          const SizedBox(height: 7),
-
-          _smallInfo(
-            Icons.people_outline,
-            space['capacity']!,
-          ),
-
-          const SizedBox(height: 18),
-
-          const Text(
-            'View space details →',
-            style: TextStyle(
-              color: navy,
-              fontSize: 12,
-              fontWeight: FontWeight.w700,
+                const Text(
+                  'View space details →',
+                  style: TextStyle(
+                    color: navy,
+                    fontSize: 12,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+              ],
             ),
           ),
         ],
       ),
-    );
-  }
-
-  Widget _smallInfo(
-    IconData icon,
-    String text,
-  ) {
-    return Row(
-      children: [
-        Icon(
-          icon,
-          size: 15,
-          color: textGrey,
-        ),
-        const SizedBox(width: 7),
-        Text(
-          text,
-          style: const TextStyle(
-            color: textGrey,
-            fontSize: 12,
-          ),
-        ),
-      ],
     );
   }
 
@@ -561,14 +726,38 @@ class PropertyDetailScreen extends StatelessWidget {
 
   Widget _facilities() {
     final facilities = [
-      'Parking Area',
-      'Security',
-      'Loading Dock',
-      'Food Court',
-      'Event Space',
-      'Public Wi-Fi',
-      'Restroom',
-      'Prayer Room',
+      (
+        Icons.directions_car_outlined,
+        'Parking Area',
+      ),
+      (
+        Icons.verified_user_outlined,
+        'Security',
+      ),
+      (
+        Icons.local_shipping_outlined,
+        'Loading Dock',
+      ),
+      (
+        Icons.restaurant_outlined,
+        'Food Court',
+      ),
+      (
+        Icons.groups_outlined,
+        'Event Space',
+      ),
+      (
+        Icons.wifi_outlined,
+        'Public Wi-Fi',
+      ),
+      (
+        Icons.wc_outlined,
+        'Restroom',
+      ),
+      (
+        Icons.mosque_outlined,
+        'Prayer Room',
+      ),
     ];
 
     return Container(
@@ -576,186 +765,122 @@ class PropertyDetailScreen extends StatelessWidget {
       color: background,
       padding: const EdgeInsets.symmetric(
         horizontal: 70,
-        vertical: 75,
+        vertical: 65,
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text(
-            'FACILITIES',
-            style: TextStyle(
-              color: gold,
-              fontSize: 11,
-              fontWeight: FontWeight.w700,
-              letterSpacing: 1.8,
-            ),
+      child: Center(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(
+            maxWidth: 1250,
           ),
-
-          const SizedBox(height: 14),
-
-          const Text(
-            'Everything you need',
-            style: TextStyle(
-              color: navy,
-              fontSize: 32,
-              fontWeight: FontWeight.w700,
-            ),
-          ),
-
-          const SizedBox(height: 30),
-
-          Wrap(
-            spacing: 12,
-            runSpacing: 12,
-            children: facilities.map(
-              (facility) {
-                return Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 18,
-                    vertical: 14,
-                  ),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    border: Border.all(
-                      color: const Color(0xFFE0E1DD),
-                    ),
-                  ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      const Icon(
-                        Icons.check_circle_outline,
-                        size: 16,
+          child: Row(
+            crossAxisAlignment:
+                CrossAxisAlignment.center,
+            children: [
+              SizedBox(
+                width: 310,
+                child: Column(
+                  crossAxisAlignment:
+                      CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      'FACILITIES',
+                      style: TextStyle(
                         color: gold,
+                        fontSize: 11,
+                        fontWeight: FontWeight.w700,
+                        letterSpacing: 1.8,
                       ),
-                      const SizedBox(width: 8),
-                      Text(
-                        facility,
-                        style: const TextStyle(
-                          color: navy,
-                          fontSize: 12,
+                    ),
+
+                    const SizedBox(height: 10),
+
+                    const Text(
+                      'Everything you need',
+                      style: TextStyle(
+                        color: navy,
+                        fontSize: 30,
+                        height: 1.15,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+
+                    const SizedBox(height: 12),
+
+                    const Text(
+                      'Facilities designed to support '
+                      'your event and rental needs.',
+                      style: TextStyle(
+                        color: textGrey,
+                        fontSize: 13,
+                        height: 1.6,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
+              const SizedBox(width: 45),
+
+              Expanded(
+                child: GridView.builder(
+                  shrinkWrap: true,
+                  physics:
+                      const NeverScrollableScrollPhysics(),
+                  itemCount: facilities.length,
+                  gridDelegate:
+                      const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 4,
+                    mainAxisSpacing: 12,
+                    crossAxisSpacing: 12,
+                    mainAxisExtent: 68,
+                  ),
+                  itemBuilder:
+                      (context, index) {
+                    final item =
+                        facilities[index];
+
+                    return Container(
+                      padding:
+                          const EdgeInsets.symmetric(
+                        horizontal: 15,
+                      ),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius:
+                            BorderRadius.circular(8),
+                        border: Border.all(
+                          color: border,
                         ),
                       ),
-                    ],
-                  ),
-                );
-              },
-            ).toList(),
-          ),
-        ],
-      ),
-    );
-  }
-
-  // =========================================================
-  // EVENTS
-  // =========================================================
-
-  Widget _events() {
-    return Container(
-      width: double.infinity,
-      color: Colors.white,
-      padding: const EdgeInsets.symmetric(
-        horizontal: 70,
-        vertical: 75,
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text(
-            'UPCOMING EVENTS',
-            style: TextStyle(
-              color: gold,
-              fontSize: 11,
-              fontWeight: FontWeight.w700,
-              letterSpacing: 1.8,
-            ),
-          ),
-
-          const SizedBox(height: 14),
-
-          const Text(
-            'What’s happening here',
-            style: TextStyle(
-              color: navy,
-              fontSize: 32,
-              fontWeight: FontWeight.w700,
-            ),
-          ),
-
-          const SizedBox(height: 30),
-
-          _eventRow(
-            '10 OCT',
-            'Jakarta Fashion Week',
-            'Exhibition',
-          ),
-
-          _eventRow(
-            '20 OCT',
-            'Food Exhibition',
-            'Exhibition',
-          ),
-
-          _eventRow(
-            '05 NOV',
-            'Music Festival',
-            'Festival',
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _eventRow(
-    String date,
-    String title,
-    String type,
-  ) {
-    return Container(
-      padding: const EdgeInsets.symmetric(
-        vertical: 20,
-      ),
-      decoration: const BoxDecoration(
-        border: Border(
-          bottom: BorderSide(
-            color: Color(0xFFE1E2DE),
+                      child: Row(
+                        children: [
+                          Icon(
+                            item.$1,
+                            color: gold,
+                            size: 22,
+                          ),
+                          const SizedBox(width: 10),
+                          Expanded(
+                            child: Text(
+                              item.$2,
+                              style:
+                                  const TextStyle(
+                                color: navy,
+                                fontSize: 12,
+                                fontWeight:
+                                    FontWeight.w600,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ],
           ),
         ),
-      ),
-      child: Row(
-        children: [
-          SizedBox(
-            width: 100,
-            child: Text(
-              date,
-              style: const TextStyle(
-                color: gold,
-                fontSize: 11,
-                fontWeight: FontWeight.w700,
-              ),
-            ),
-          ),
-
-          Expanded(
-            child: Text(
-              title,
-              style: const TextStyle(
-                color: navy,
-                fontSize: 15,
-                fontWeight: FontWeight.w700,
-              ),
-            ),
-          ),
-
-          Text(
-            type,
-            style: const TextStyle(
-              color: textGrey,
-              fontSize: 12,
-            ),
-          ),
-        ],
       ),
     );
   }
@@ -767,179 +892,259 @@ class PropertyDetailScreen extends StatelessWidget {
   Widget _location() {
     return Container(
       width: double.infinity,
-      color: background,
+      color: Colors.white,
       padding: const EdgeInsets.symmetric(
         horizontal: 70,
-        vertical: 75,
+        vertical: 70,
       ),
-      child: Row(
-        children: [
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text(
-                  'LOCATION',
-                  style: TextStyle(
-                    color: gold,
-                    fontSize: 11,
-                    fontWeight: FontWeight.w700,
-                    letterSpacing: 1.8,
-                  ),
-                ),
-
-                const SizedBox(height: 15),
-
-                const Text(
-                  'Find us on the map.',
-                  style: TextStyle(
-                    color: navy,
-                    fontSize: 32,
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),
-
-                const SizedBox(height: 18),
-
-                Text(
-                  property.location,
-                  style: const TextStyle(
-                    color: textGrey,
-                    fontSize: 14,
-                  ),
-                ),
-
-                const SizedBox(height: 8),
-
-                const Text(
-                  'Jakarta, Indonesia',
-                  style: TextStyle(
-                    color: textGrey,
-                    fontSize: 13,
-                  ),
-                ),
-              ],
-            ),
+      child: Center(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(
+            maxWidth: 1250,
           ),
-
-          const SizedBox(width: 60),
-
-          Expanded(
-            flex: 2,
-            child: Container(
-              height: 320,
-              decoration: BoxDecoration(
-                color: const Color(0xFFE1E2DE),
-                borderRadius: BorderRadius.circular(4),
-              ),
-              child: Stack(
-                children: [
-                  const Center(
-                    child: Icon(
-                      Icons.map_outlined,
-                      size: 75,
-                      color: Color(0xFF999C96),
+          child: Row(
+            children: [
+              Expanded(
+                flex: 4,
+                child: Column(
+                  crossAxisAlignment:
+                      CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      'LOCATION',
+                      style: TextStyle(
+                        color: gold,
+                        fontSize: 11,
+                        fontWeight: FontWeight.w700,
+                        letterSpacing: 1.8,
+                      ),
                     ),
-                  ),
 
-                  const Positioned(
-                    left: 220,
-                    top: 130,
-                    child: Icon(
-                      Icons.location_on,
-                      size: 42,
-                      color: navy,
+                    const SizedBox(height: 12),
+
+                    const Text(
+                      'Find us on the map.',
+                      style: TextStyle(
+                        color: navy,
+                        fontSize: 32,
+                        fontWeight: FontWeight.w700,
+                      ),
                     ),
-                  ),
-                ],
+
+                    const SizedBox(height: 18),
+
+                    Row(
+                      crossAxisAlignment:
+                          CrossAxisAlignment.start,
+                      children: [
+                        const Icon(
+                          Icons.location_on_outlined,
+                          color: gold,
+                          size: 21,
+                        ),
+                        const SizedBox(width: 9),
+                        Expanded(
+                          child: Text(
+                            property.location,
+                            style: const TextStyle(
+                              color: textGrey,
+                              fontSize: 14,
+                              height: 1.6,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+
+                    const SizedBox(height: 20),
+
+                    OutlinedButton.icon(
+                      onPressed: () {},
+                      icon: const Icon(
+                        Icons.map_outlined,
+                        size: 17,
+                      ),
+                      label: const Text(
+                        'View on Map',
+                      ),
+                      style:
+                          OutlinedButton.styleFrom(
+                        foregroundColor: navy,
+                        side: const BorderSide(
+                          color: navy,
+                        ),
+                        padding:
+                            const EdgeInsets.symmetric(
+                          horizontal: 18,
+                          vertical: 14,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
+
+              const SizedBox(width: 60),
+
+              Expanded(
+                flex: 6,
+                child: Container(
+                  height: 350,
+                  decoration: BoxDecoration(
+                    color: const Color(0xFFE7E8E4),
+                    borderRadius:
+                        BorderRadius.circular(8),
+                  ),
+                  child: Stack(
+                    children: [
+                      const Center(
+                        child: Icon(
+                          Icons.map_outlined,
+                          size: 75,
+                          color: Color(0xFF999C96),
+                        ),
+                      ),
+
+                      const Center(
+                        child: Padding(
+                          padding:
+                              EdgeInsets.only(
+                            left: 90,
+                            top: 20,
+                          ),
+                          child: Icon(
+                            Icons.location_on,
+                            color: navy,
+                            size: 45,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }
 
   // =========================================================
-  // RENTAL BANNER
+  // RENTAL CTA
   // =========================================================
 
   Widget _rentalBanner() {
     return Container(
-      margin: const EdgeInsets.fromLTRB(
+      width: double.infinity,
+      color: background,
+      padding: const EdgeInsets.fromLTRB(
         70,
         70,
         70,
         80,
       ),
-      padding: const EdgeInsets.all(40),
-      color: navy,
-      child: Row(
-        children: [
-          const Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+      child: Center(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(
+            maxWidth: 1250,
+          ),
+          child: Container(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 45,
+              vertical: 40,
+            ),
+            decoration: BoxDecoration(
+              color: navy,
+              borderRadius:
+                  BorderRadius.circular(8),
+            ),
+            child: Row(
               children: [
-                Text(
-                  'INTERESTED IN THIS PROPERTY?',
-                  style: TextStyle(
-                    color: gold,
-                    fontSize: 10,
-                    fontWeight: FontWeight.w700,
-                    letterSpacing: 1.6,
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment:
+                        CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        'INTERESTED IN THIS PROPERTY?',
+                        style: TextStyle(
+                          color: gold,
+                          fontSize: 10,
+                          fontWeight: FontWeight.w700,
+                          letterSpacing: 1.6,
+                        ),
+                      ),
+
+                      const SizedBox(height: 10),
+
+                      const Text(
+                        'Ready to rent this space?',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 27,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+
+                      const SizedBox(height: 8),
+
+                      const Text(
+                        'Submit a rental request and our team '
+                        'will contact you.',
+                        style: TextStyle(
+                          color: Color(0xFFADB5C1),
+                          fontSize: 13,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
 
-                SizedBox(height: 12),
+                const SizedBox(width: 35),
 
-                Text(
-                  'Ready to rent this space?',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 25,
-                    fontWeight: FontWeight.w700,
+                ElevatedButton(
+                  onPressed: onRequestRental,
+                  style:
+                      ElevatedButton.styleFrom(
+                    backgroundColor: gold,
+                    foregroundColor:
+                        Colors.white,
+                    elevation: 0,
+                    padding:
+                        const EdgeInsets.symmetric(
+                      horizontal: 28,
+                      vertical: 17,
+                    ),
+                    shape:
+                        RoundedRectangleBorder(
+                      borderRadius:
+                          BorderRadius.circular(6),
+                    ),
                   ),
-                ),
-
-                SizedBox(height: 8),
-
-                Text(
-                  'Submit a rental request and our team '
-                  'will contact you.',
-                  style: TextStyle(
-                    color: Color(0xFFADB5C1),
-                    fontSize: 13,
+                  child: const Row(
+                    mainAxisSize:
+                        MainAxisSize.min,
+                    children: [
+                      Text(
+                        'Request Rental',
+                        style: TextStyle(
+                          fontWeight:
+                              FontWeight.w700,
+                        ),
+                      ),
+                      SizedBox(width: 10),
+                      Icon(
+                        Icons.arrow_forward,
+                        size: 17,
+                      ),
+                    ],
                   ),
                 ),
               ],
             ),
           ),
-
-          const SizedBox(width: 30),
-
-          ElevatedButton(
-            onPressed: () {},
-            style: ButtonStyle(
-              backgroundColor: WidgetStateProperty.all(gold),
-              foregroundColor: WidgetStateProperty.all(
-                Colors.white,
-              ),
-              elevation: WidgetStateProperty.all(0),
-              padding: WidgetStateProperty.all(
-                const EdgeInsets.symmetric(
-                  horizontal: 25,
-                  vertical: 16,
-                ),
-              ),
-            ),
-            child: const Text(
-              'Request Rental',
-              style: TextStyle(
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-          ),
-        ],
+        ),
       ),
     );
   }
@@ -954,30 +1159,38 @@ class PropertyDetailScreen extends StatelessWidget {
       color: const Color(0xFF101827),
       padding: const EdgeInsets.symmetric(
         horizontal: 70,
-        vertical: 40,
+        vertical: 35,
       ),
-      child: Row(
-        children: [
-          const Text(
-            'EVENTARY',
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 16,
-              fontWeight: FontWeight.w700,
-              letterSpacing: 1.5,
-            ),
+      child: Center(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(
+            maxWidth: 1250,
           ),
+          child: Row(
+            children: [
+              const Text(
+                'EVENTARY',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w700,
+                  letterSpacing: 1.5,
+                ),
+              ),
 
-          const Spacer(),
+              const Spacer(),
 
-          Text(
-            'Property & Event Management Platform',
-            style: TextStyle(
-              color: Colors.white.withOpacity(0.45),
-              fontSize: 11,
-            ),
+              Text(
+                'Property & Event Management Platform',
+                style: TextStyle(
+                  color:
+                      Colors.white.withOpacity(.45),
+                  fontSize: 11,
+                ),
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }

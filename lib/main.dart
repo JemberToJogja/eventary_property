@@ -1,9 +1,16 @@
-import 'package:eventary_prototype/eksternal/home/view/external_home_screen.dart';
+import 'package:eventary_prototype/admin/super_admin/view/super_admin_dashboard_screen.dart';
+import 'package:eventary_prototype/auth/view/internal_login_screen.dart';
+import 'package:eventary_prototype/auth/viewmodel/auth_viewmodel.dart';
+import 'package:eventary_prototype/eksternal/home/view/external_shell_screen.dart';
+import 'package:eventary_prototype/screens/home_screen.dart';
+import 'package:eventary_prototype/theme/app_theme.dart';
 import 'package:flutter/material.dart';
-import 'screens/home_screen.dart';
-import 'theme/app_theme.dart';
+import 'package:flutter_web_plugins/url_strategy.dart';
 
 void main() {
+  // Menggunakan URL tanpa #
+  usePathUrlStrategy();
+
   runApp(const EventaryApp());
 }
 
@@ -12,12 +19,37 @@ class EventaryApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final authViewModel = AuthViewModel();
+
     return MaterialApp(
       title: 'Eventary - Property Visualization',
       debugShowCheckedModeBanner: false,
       theme: buildAppTheme(),
-      home: const HomeScreen(),
-      // home: const ExternalHomeScreen(),
+
+      routes: {
+        // =========================
+        // EXTERNAL / PUBLIC
+        // =========================
+        '/': (context) => const ExternalShellScreen(),
+
+        // =========================
+        // INTERNAL LOGIN
+        // =========================
+        '/login': (context) => InternalLoginScreen(
+              authViewModel: authViewModel,
+            ),
+
+        // =========================
+        // SUPER ADMIN
+        // =========================
+        '/super-admin': (context) =>
+            const SuperAdminDashboardScreen(),
+
+        // =========================
+        // ADMIN
+        // =========================
+        '/admin': (context) => const HomeScreen(),
+      },
     );
   }
 }
