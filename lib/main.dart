@@ -2,7 +2,7 @@ import 'package:eventary_prototype/admin/super_admin/view/super_admin_dashboard_
 import 'package:eventary_prototype/auth/view/internal_login_screen.dart';
 import 'package:eventary_prototype/auth/viewmodel/auth_viewmodel.dart';
 import 'package:eventary_prototype/eksternal/home/view/external_shell_screen.dart';
-import 'package:eventary_prototype/screens/home_screen.dart';
+import 'package:eventary_prototype/admin/screens/home_screen.dart';
 import 'package:eventary_prototype/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_web_plugins/url_strategy.dart';
@@ -22,7 +22,7 @@ class EventaryApp extends StatelessWidget {
     final authViewModel = AuthViewModel();
 
     return MaterialApp(
-      title: 'Eventary - Property Visualization',
+      title: 'Iventaris - Property Visualization',
       debugShowCheckedModeBanner: false,
       theme: buildAppTheme(),
 

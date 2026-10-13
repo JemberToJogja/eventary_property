@@ -1,18 +1,18 @@
 import 'package:eventary_prototype/admin/event/view/event_screen.dart';
 import 'package:eventary_prototype/admin/maintenance/view/maintenance_screen.dart';
 import 'package:eventary_prototype/admin/penyewaan/view/rental_screen.dart';
-import 'package:eventary_prototype/screens/dashboard_screen.dart';
+import 'package:eventary_prototype/admin/screens/dashboard_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:maplibre_gl/maplibre_gl.dart' show LatLng;
 
-import '../data/dummy_properties.dart';
+import '../../data/dummy_properties.dart';
 import '../models/property.dart';
-import '../theme/app_theme.dart';
-import '../widgets/coordinate_picker_dialog.dart';
-import '../widgets/property_card.dart';
-import '../widgets/property_detail.dart';
-import '../widgets/property_map.dart';
-import '../widgets/sidebar.dart';
+import '../../theme/app_theme.dart';
+import '../../widgets/coordinate_picker_dialog.dart';
+import '../../widgets/property_card.dart';
+import '../../widgets/property_detail.dart';
+import '../../widgets/property_map.dart';
+import '../../widgets/sidebar.dart';
 import 'admin_dashboard_screen.dart';
 
 const double _narrowBreakpoint = 900;

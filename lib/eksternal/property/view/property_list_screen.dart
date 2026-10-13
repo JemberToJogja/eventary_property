@@ -142,7 +142,7 @@ class _PropertyListScreenState
                   CrossAxisAlignment.start,
               children: [
                 Text(
-                  'EVENTARY',
+                  'IVENTARIS',
                   style: TextStyle(
                     color: navy,
                     fontSize: 21,
@@ -949,7 +949,7 @@ class _PropertyListScreenState
       child: Row(
         children: [
           const Text(
-            'EVENTARY',
+            'IVENTARIS',
             style: TextStyle(
               color: Colors.white,
               fontSize: 16,

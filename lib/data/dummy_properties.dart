@@ -1,4 +1,4 @@
-import '../models/property.dart';
+import '../admin/models/property.dart';
 
 /// Local dummy dataset standing in for a future `/api/properties`
 /// endpoint. Swapping this out later just means replacing this

@@ -81,7 +81,7 @@ class PropertyDetailScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'EVENTARY',
+                  'IVENTARIS',
                   style: TextStyle(
                     color: navy,
                     fontSize: 21,
@@ -1169,7 +1169,7 @@ class PropertyDetailScreen extends StatelessWidget {
           child: Row(
             children: [
               const Text(
-                'EVENTARY',
+                'IVENTARIS',
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 16,

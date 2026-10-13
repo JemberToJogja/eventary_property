@@ -222,7 +222,7 @@ class _InternalLoginScreenState
                 const SizedBox(height: 28),
 
                 const Text(
-                  'EVENTARY',
+                  'IVENTARIS',
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 34,
@@ -561,7 +561,7 @@ class _InternalLoginScreenState
                   CrossAxisAlignment.start,
               children: [
                 const Text(
-                  'EVENTARY',
+                  'Iventaris',
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 27,

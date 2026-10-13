@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../data/dummy_properties.dart';
-import '../../../models/property.dart';
+import '../../../admin/models/property.dart';
 import '../../map/view/external_map_screen.dart';
 
 class ExternalHomeScreen extends StatelessWidget {
@@ -94,7 +94,7 @@ class ExternalHomeScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'EVENTARY',
+                  'Iventaris',
                   style: TextStyle(
                     color: navy,
                     fontSize: 21,
@@ -813,7 +813,7 @@ class ExternalHomeScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Text(
-                'TENTANG EVENTARY',
+                'TENTANG Iventaris',
                 style: TextStyle(
                   color: gold,
                   fontSize: 11,
@@ -823,7 +823,7 @@ class ExternalHomeScreen extends StatelessWidget {
               ),
               const SizedBox(height: 12),
               const Text(
-                'Mengenal Eventary',
+                'Mengenal Iventaris',
                 style: TextStyle(
                   color: navy,
                   fontSize: 35,
@@ -832,7 +832,7 @@ class ExternalHomeScreen extends StatelessWidget {
               ),
               const SizedBox(height: 18),
               const Text(
-                'Eventary merupakan platform visualisasi properti '
+                'Iventaris merupakan platform visualisasi properti '
                 'yang membantu pengguna menemukan, mengeksplorasi, '
                 'dan mendapatkan informasi mengenai berbagai '
                 'properti untuk kebutuhan acara, bisnis, dan '
@@ -938,7 +938,7 @@ class ExternalHomeScreen extends StatelessWidget {
               SizedBox(height: 10),
               Text(
                 'Wujudkan Kebutuhan Anda\n'
-                'Bersama Eventary',
+                'Bersama Iventaris',
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 30,
@@ -1013,7 +1013,7 @@ class ExternalHomeScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'EVENTARY',
+                    'Iventaris',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 20,
@@ -1061,7 +1061,7 @@ class ExternalHomeScreen extends StatelessWidget {
               final contact = _footerColumn(
                 'Kontak',
                 [
-                  'info@eventary.co.id',
+                  'info@Iventaris.co.id',
                   '+62 21 1234 5678',
                   'Indonesia',
                 ],
@@ -1109,7 +1109,7 @@ class ExternalHomeScreen extends StatelessWidget {
             children: [
               const Expanded(
                 child: Text(
-                  '© 2026 Eventary. All rights reserved.',
+                  '© 2026 Iventaris. All rights reserved.',
                   style: TextStyle(
                     color: Colors.white38,
                     fontSize: 11,

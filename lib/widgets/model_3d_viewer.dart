@@ -1,7 +1,7 @@
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:model_viewer_plus/model_viewer_plus.dart';
-import '../models/property.dart';
+import '../admin/models/property.dart';
 import '../theme/app_theme.dart';
 
 /// 3D preview for a property.

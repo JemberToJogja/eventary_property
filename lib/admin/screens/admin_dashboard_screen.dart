@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:maplibre_gl/maplibre_gl.dart';
 import '../models/property.dart';
-import '../theme/app_theme.dart';
-import '../widgets/coordinate_picker_dialog.dart';
+import '../../theme/app_theme.dart';
+import '../../widgets/coordinate_picker_dialog.dart';
 
 /// Internal dashboard for managing the property/venue dataset: a
 /// searchable table plus add/edit/delete, backed by the same in-memory

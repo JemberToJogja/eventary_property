@@ -7,7 +7,7 @@ class AuthViewModel extends ChangeNotifier {
     const AuthUser(
       id: 'super-001',
       name: 'Super Administrator',
-      email: 'superadmin@eventary.com',
+      email: 'superadmin@Iventaris.com',
       password: '123456',
       role: UserRole.superAdmin,
     ),
@@ -15,7 +15,7 @@ class AuthViewModel extends ChangeNotifier {
     const AuthUser(
       id: 'admin-001',
       name: 'Andi Pratama',
-      email: 'andi@eventary.com',
+      email: 'andi@Iventaris.com',
       password: '123456',
       role: UserRole.admin,
       division: 'Property Management',
@@ -24,7 +24,7 @@ class AuthViewModel extends ChangeNotifier {
     const AuthUser(
       id: 'admin-002',
       name: 'Budi Santoso',
-      email: 'budi@eventary.com',
+      email: 'budi@Iventaris.com',
       password: '123456',
       role: UserRole.admin,
       division: 'Rental',

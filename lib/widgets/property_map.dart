@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:maplibre_gl/maplibre_gl.dart';
-import '../models/property.dart';
+import '../admin/models/property.dart';
 import '../theme/app_theme.dart';
 import 'model_3d_viewer.dart';
 

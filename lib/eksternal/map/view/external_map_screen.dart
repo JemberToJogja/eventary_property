@@ -3,7 +3,7 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 
 import '../../../data/dummy_properties.dart';
-import '../../../models/property.dart';
+import '../../../admin/models/property.dart';
 
 class ExternalMapScreen extends StatefulWidget {
   const ExternalMapScreen({
@@ -147,7 +147,7 @@ class _ExternalMapScreenState extends State<ExternalMapScreen> {
                 vertical: 8,
               ),
               child: Text(
-                'EVENTARY',
+                'Iventaris',
                 style: TextStyle(
                   color: navy,
                   fontSize: 22,
@@ -288,7 +288,7 @@ class _ExternalMapScreenState extends State<ExternalMapScreen> {
           children: [
             TileLayer(
               urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-              userAgentPackageName: 'com.eventary.property',
+              userAgentPackageName: 'com.Iventaris.property',
             ),
             MarkerLayer(
               markers: _buildMarkers(),

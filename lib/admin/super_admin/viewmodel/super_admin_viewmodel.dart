@@ -40,7 +40,7 @@ class SuperAdminViewModel extends ChangeNotifier {
     AdminUser(
       id: '1',
       name: 'Andi Pratama',
-      email: 'andi@eventary.com',
+      email: 'andi@Iventaris.com',
       division: 'Property Management',
       access: AccessPermission(
         property: true,
@@ -51,7 +51,7 @@ class SuperAdminViewModel extends ChangeNotifier {
     AdminUser(
       id: '2',
       name: 'Budi Santoso',
-      email: 'budi@eventary.com',
+      email: 'budi@Iventaris.com',
       division: 'Rental',
       access: AccessPermission(
         property: true,
@@ -62,7 +62,7 @@ class SuperAdminViewModel extends ChangeNotifier {
     AdminUser(
       id: '3',
       name: 'Citra Lestari',
-      email: 'citra@eventary.com',
+      email: 'citra@Iventaris.com',
       division: 'Finance',
       isActive: false,
       access: AccessPermission(

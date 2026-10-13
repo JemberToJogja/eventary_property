@@ -15,7 +15,7 @@ const List<SidebarItem> sidebarItems = [
   ),
   SidebarItem(
     icon: Icons.inventory_2_rounded,
-    label: 'Eventaris',
+    label: 'Iventaris',
   ),
   SidebarItem(
     icon: Icons.map_rounded,
@@ -102,7 +102,7 @@ class Sidebar extends StatelessWidget {
           ),
           const SizedBox(width: 10),
           const Text(
-            'Eventary',
+            'Iventaris',
             style: TextStyle(
               color: AppColors.textOnDark,
               fontSize: 18,

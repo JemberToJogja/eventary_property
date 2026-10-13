@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../models/property.dart';
+import '../admin/models/property.dart';
 import '../theme/app_theme.dart';
 
 /// Small floating card that appears next to a selected marker,

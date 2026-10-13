@@ -1,4 +1,4 @@
-import '../../../models/property.dart';
+import '../../../admin/models/property.dart';
 
 class RentalRequest {
   final String id;

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../models/property.dart';
+import '../../../admin/models/property.dart';
 
 import '../../map/view/external_map_screen.dart';
 import '../../property/view/property_list_screen.dart';
@@ -296,7 +296,7 @@ class _ExternalShellScreenState
                   CrossAxisAlignment.start,
               children: [
                 Text(
-                  'EVENTARY',
+                  'Iventaris',
                   style: TextStyle(
                     color: navy,
                     fontSize: 21,

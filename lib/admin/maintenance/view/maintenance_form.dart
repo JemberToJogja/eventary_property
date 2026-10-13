@@ -1,4 +1,4 @@
-import 'package:eventary_prototype/models/property.dart';
+import 'package:eventary_prototype/admin/models/property.dart';
 import 'package:eventary_prototype/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import '../model/maintenance_model.dart';

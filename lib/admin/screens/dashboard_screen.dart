@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 import '../models/property.dart';
-import '../theme/app_theme.dart';
+import '../../theme/app_theme.dart';
 
 /// Ringkasan padat seluruh aset — KPI, daftar butuh perhatian, dan
 /// distribusi status/kondisi/tipe dalam satu layar tanpa scroll berlebih.

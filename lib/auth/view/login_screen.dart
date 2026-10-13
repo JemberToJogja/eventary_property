@@ -335,7 +335,7 @@ class _LoginScreenState extends State<LoginScreen> {
           CrossAxisAlignment.start,
       children: [
         Text(
-          'EVENTARY',
+          'IVENTARIS',
           style: TextStyle(
             color: navy,
             fontSize: 23,

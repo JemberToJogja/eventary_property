@@ -109,7 +109,7 @@ class _SuperAdminDashboardScreenState
       child: Column(
         children: [
           // BRAND
-          Padding(
+          const Padding(
             padding: const EdgeInsets.fromLTRB(
               25,
               30,
@@ -121,7 +121,7 @@ class _SuperAdminDashboardScreenState
                   CrossAxisAlignment.start,
               children: [
                 const Text(
-                  'EVENTARY',
+                  'IVENTARIS',
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 22,
@@ -435,7 +435,7 @@ class _SuperAdminDashboardScreenState
           ),
           const SizedBox(width: 5),
           const Text(
-            'EVENTARY',
+            'IVENTARIS',
             style: TextStyle(
               color: Colors.white,
               fontSize: 18,
